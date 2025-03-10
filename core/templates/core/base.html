@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Luphonix - Innovative Tech Solutions{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/static/svg/phoenix_logo.svg" type="image/svg+xml">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luphonix: {
+                            light: '#7cdcff',
+                            DEFAULT: '#00c3ff',
+                            dark: '#0077aa',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Background Animation with Infinity Symbol -->
+    <div class="background-animation">
+        <div class="infinity-container">
+            <img src="/static/svg/infinity_bg.svg" alt="Infinity Background" class="infinity-symbol">
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+                <img src="/static/svg/phoenix_logo.svg" alt="Luphonix" class="logo-img me-2" width="40" height="40">
+                <span class="logo-text text-luphonix">Luphonix</span>
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'team' %}">Our Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'technologies' %}">Technologies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'projects' %}">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 relative z-10">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right">
+                    <h4 class="text-uppercase mb-4">Luphonix</h4>
+                    <p class="lead mb-0">
+                        Building innovation through technology
+                        <br>
+                        <span class="text-luphonix">Soar with us.</span>
+                    </p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="text-uppercase mb-4">Around the Web</h4>
+                    <div class="d-flex justify-content-center justify-content-lg-start gap-3 social-icons">
+                        <a class="btn btn-outline-light btn-social" href="#!"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#!"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#!"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+                    <h4 class="text-uppercase mb-4">Location</h4>
+                    <p class="lead mb-0">
+                        123 Innovation Drive
+                        <br>
+                        Tech Valley, Digital City
+                        <br>
+                        contact@luphonix.com
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-4 px-4 px-lg-5">
+            <div class="text-center">
+                <p class="small text-luphonix">© {% now "Y" %} Luphonix. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <!-- Custom JS for animations -->
+    <script src="/static/js/animations.js"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Our Technologies - Luphonix{% endblock %}
+
+{% block content %}
+<!-- Technologies Header -->
+<section class="page-section-header bg-gray-800">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="text-white mt-5" data-aos="fade-down">Our Technologies</h1>
+                <hr class="divider divider-light" data-aos="fade-up" data-aos-delay="100" />
+                <p class="text-white-75 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    At Luphonix, we leverage a wide range of cutting-edge technologies to build sophisticated and scalable solutions.
+                    Our expertise spans across frontend, backend, database, and DevOps technologies.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technologies Categories Section -->
+<section class="page-section bg-gray-900">
+    <div class="container px-4 px-lg-5">
+        {% for category, techs in technologies_by_category.items %}
+        {% if techs %}
+        <div class="tech-category mb-5">
+            <h2 class="text-luphonix mb-4" data-aos="fade-right">{{ category|title }} Technologies</h2>
+            <div class="row gx-4 gx-lg-5">
+                {% for tech in techs %}
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                    <div class="tech-card">
+                        <div class="mb-2"><i class="{{ tech.icon_class }} fa-3x text-luphonix"></i></div>
+                        <h3 class="h5 mb-2">{{ tech.name }}</h3>
+                        <p class="text-white-75 small mb-0">{{ tech.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <div class="text-center">
+            <p class="text-white-75">Our technology stack information is coming soon!</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Development Process Section -->
+<section class="page-section bg-gray-800">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-center text-white mb-5" data-aos="fade-down">Our Development Process</h2>
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-10">
+                <div class="process-timeline">
+                    <div class="process-item" data-aos="fade-right">
+                        <div class="process-icon">
+                            <i class="fas fa-lightbulb text-luphonix"></i>
+                        </div>
+                        <div class="process-content">
+                            <h3 class="h4 mb-2">Discovery</h3>
+                            <p class="text-white-75">We begin by understanding your goals, target audience, and technical requirements through in-depth consultations.</p>
+                        </div>
+                    </div>
+                    <div class="process-item" data-aos="fade-left" data-aos-delay="100">
+                        <div class="process-icon">
+                            <i class="fas fa-pencil-ruler text-luphonix"></i>
+                        </div>
+                        <div class="process-content">
+                            <h3 class="h4 mb-2">Planning & Design</h3>
+                            <p class="text-white-75">Our team creates detailed specifications, wireframes, and prototypes to visualize the solution before development begins.</p>
+                        </div>
+                    </div>
+                    <div class="process-item" data-aos="fade-right" data-aos-delay="200">
+                        <div class="process-icon">
+                            <i class="fas fa-code text-luphonix"></i>
+                        </div>
+                        <div class="process-content">
+                            <h3 class="h4 mb-2">Development</h3>
+                            <p class="text-white-75">Using agile methodologies, we build your solution with a focus on quality, maintainability, and performance.</p>
+                        </div>
+                    </div>
+                    <div class="process-item" data-aos="fade-left" data-aos-delay="300">
+                        <div class="process-icon">
+                            <i class="fas fa-vial text-luphonix"></i>
+                        </div>
+                        <div class="process-content">
+                            <h3 class="h4 mb-2">Testing & QA</h3>
+                            <p class="text-white-75">Rigorous testing procedures ensure your solution is robust, secure, and meets all requirements.</p>
+                        </div>
+                    </div>
+                    <div class="process-item" data-aos="fade-right" data-aos-delay="400">
+                        <div class="process-icon">
+                            <i class="fas fa-rocket text-luphonix"></i>
+                        </div>
+                        <div class="process-content">
+                            <h3 class="h4 mb-2">Deployment</h3>
+                            <p class="text-white-75">We deploy your solution using CI/CD pipelines to ensure a smooth transition to production.</p>
+                        </div>
+                    </div>
+                    <div class="process-item" data-aos="fade-left" data-aos-delay="500">
+                        <div class="process-icon">
+                            <i class="fas fa-headset text-luphonix"></i>
+                        </div>
+                        <div class="process-content">
+                            <h3 class="h4 mb-2">Support & Maintenance</h3>
+                            <p class="text-white-75">Our team provides ongoing support, updates, and enhancements to keep your solution running optimally.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="page-section bg-luphonix-dark text-white">
+    <div class="container px-4 px-lg-5 text-center">
+        <h2 class="mb-4" data-aos="fade-down">Ready to leverage our technical expertise?</h2>
+        <p class="text-white-75 mb-5" data-aos="fade-up" data-aos-delay="100">
+            Let's discuss how our technology stack can help solve your business challenges and drive innovation.
+        </p>
+        <a class="btn btn-light btn-xl" href="{% url 'contact' %}" data-aos="zoom-in" data-aos-delay="200">Start Your Project</a>
+    </div>
+</section>
+{% endblock %}

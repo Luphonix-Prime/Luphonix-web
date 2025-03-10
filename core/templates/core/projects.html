@@ -1,0 +1,157 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Our Projects - Luphonix{% endblock %}
+
+{% block content %}
+<!-- Projects Header -->
+<section class="page-section-header bg-gray-800">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="text-white mt-5" data-aos="fade-down">Our Projects</h1>
+                <hr class="divider divider-light" data-aos="fade-up" data-aos-delay="100" />
+                <p class="text-white-75 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    Explore our portfolio of successful projects and open-source contributions.
+                    Each project represents our commitment to quality, innovation, and client satisfaction.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects Section -->
+<section class="page-section bg-gray-900">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-luphonix mb-4" data-aos="fade-right">Featured Projects</h2>
+        <div class="row gx-4 gx-lg-5">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="featured-project-card">
+                    <div class="project-image-placeholder mb-3 rounded"></div>
+                    <h3 class="h4 mb-2">{{ project.name }}</h3>
+                    <p class="text-white-75 mb-3">{{ project.description }}</p>
+                    <div class="tech-tags mb-3">
+                        {% for tech in project.technologies.all %}
+                        <span class="tech-tag">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-links">
+                        {% if project.project_url %}
+                        <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary btn-sm me-2">
+                            <i class="fas fa-external-link-alt me-1"></i> View Project
+                        </a>
+                        {% endif %}
+                        {% if project.github_repo %}
+                        <a href="https://github.com/{{ project.github_repo }}" target="_blank" class="btn btn-outline-light btn-sm">
+                            <i class="fab fa-github me-1"></i> View on GitHub
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-white-75">Our featured projects will be available soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- GitHub Repositories Section -->
+<section class="page-section bg-gray-800">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-white mb-4" data-aos="fade-right">Our GitHub Repositories</h2>
+        <div class="row gx-4 gx-lg-5">
+            {% for repo in github_repos %}
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="github-repo-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fab fa-github fa-2x text-luphonix me-2"></i>
+                        <h3 class="h5 mb-0">{{ repo.name }}</h3>
+                    </div>
+                    <p class="text-white-75 mb-3 repo-description">{{ repo.description }}</p>
+                    <div class="repo-stats d-flex justify-content-between mb-3">
+                        <span><i class="fas fa-code me-1"></i> {{ repo.language }}</span>
+                        <span><i class="fas fa-star me-1"></i> {{ repo.stars }}</span>
+                        <span><i class="fas fa-code-branch me-1"></i> {{ repo.forks }}</span>
+                    </div>
+                    <a href="{{ repo.url }}" target="_blank" class="btn btn-outline-light btn-sm w-100">
+                        View Repository
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-white-75">GitHub repositories information is currently unavailable. Please check back later.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Project Process Section -->
+<section class="page-section bg-gray-900">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white mt-0" data-aos="fade-down">Our Project Approach</h2>
+                <hr class="divider" data-aos="zoom-in" data-aos-delay="100" />
+                <p class="text-white-75 mb-5" data-aos="fade-up" data-aos-delay="200">
+                    We follow a structured yet flexible approach to project development, ensuring high-quality outcomes 
+                    while adapting to changing requirements and emerging challenges.
+                </p>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 text-center">
+            <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="approach-card">
+                    <div class="approach-icon mb-3">
+                        <i class="fas fa-comments fa-3x text-luphonix"></i>
+                    </div>
+                    <h3 class="h4 mb-2">Client Collaboration</h3>
+                    <p class="text-white-75">We work closely with clients throughout the project lifecycle to ensure alignment with business goals.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="200">
+                <div class="approach-card">
+                    <div class="approach-icon mb-3">
+                        <i class="fas fa-tasks fa-3x text-luphonix"></i>
+                    </div>
+                    <h3 class="h4 mb-2">Agile Methodology</h3>
+                    <p class="text-white-75">Our agile approach enables us to adapt to changes quickly and deliver value continuously.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="300">
+                <div class="approach-card">
+                    <div class="approach-icon mb-3">
+                        <i class="fas fa-shield-alt fa-3x text-luphonix"></i>
+                    </div>
+                    <h3 class="h4 mb-2">Quality Assurance</h3>
+                    <p class="text-white-75">Rigorous testing and code reviews ensure robust, secure, and performant solutions.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="400">
+                <div class="approach-card">
+                    <div class="approach-icon mb-3">
+                        <i class="fas fa-chart-line fa-3x text-luphonix"></i>
+                    </div>
+                    <h3 class="h4 mb-2">Continuous Improvement</h3>
+                    <p class="text-white-75">We consistently refine our practices, tools, and technologies to deliver better results.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="page-section bg-luphonix-dark text-white">
+    <div class="container px-4 px-lg-5 text-center">
+        <h2 class="mb-4" data-aos="fade-down">Have a project idea?</h2>
+        <p class="text-white-75 mb-5" data-aos="fade-up" data-aos-delay="100">
+            Let's transform your concept into reality. Our team is ready to bring your vision to life with cutting-edge technology.
+        </p>
+        <a class="btn btn-light btn-xl" href="{% url 'contact' %}" data-aos="zoom-in" data-aos-delay="200">Discuss Your Project</a>
+    </div>
+</section>
+{% endblock %}

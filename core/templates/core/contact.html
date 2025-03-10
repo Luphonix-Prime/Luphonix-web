@@ -1,0 +1,173 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Contact Us - Luphonix{% endblock %}
+
+{% block content %}
+<!-- Contact Header -->
+<section class="page-section-header bg-gray-800">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="text-white mt-5" data-aos="fade-down">Contact Us</h1>
+                <hr class="divider divider-light" data-aos="fade-up" data-aos-delay="100" />
+                <p class="text-white-75 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    Have a question or interested in working with us? We'd love to hear from you!
+                    Fill out the form below, and our team will get back to you as soon as possible.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="page-section bg-gray-900">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6" data-aos="fade-up">
+                <div class="contact-form-card">
+                    {% if messages %}
+                    <div class="messages mb-4">
+                        {% for message in messages %}
+                        <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <form id="contactForm" method="post" data-aos="fade-up">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            {{ form.name }}
+                            <label for="{{ form.name.id_for_label }}">Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.email }}
+                            <label for="{{ form.email.id_for_label }}">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.subject }}
+                            <label for="{{ form.subject.id_for_label }}">Subject</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.message }}
+                            <label for="{{ form.message.id_for_label }}">Message</label>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-xl" id="submitButton" type="submit">
+                                <i class="fas fa-paper-plane me-2"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information Section -->
+<section class="page-section bg-gray-800">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 text-center">
+            <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-info-card">
+                    <i class="fas fa-map-marker-alt fa-3x text-luphonix mb-3"></i>
+                    <h3 class="h4 mb-2">Location</h3>
+                    <p class="text-white-75 mb-0">
+                        123 Innovation Drive<br>
+                        Tech Valley, Digital City
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-info-card">
+                    <i class="fas fa-envelope fa-3x text-luphonix mb-3"></i>
+                    <h3 class="h4 mb-2">Email</h3>
+                    <p class="text-white-75 mb-0">
+                        <a href="mailto:info@luphonix.com" class="text-decoration-none text-white-75">info@luphonix.com</a><br>
+                        <a href="mailto:support@luphonix.com" class="text-decoration-none text-white-75">support@luphonix.com</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="contact-info-card">
+                    <i class="fas fa-phone fa-3x text-luphonix mb-3"></i>
+                    <h3 class="h4 mb-2">Phone</h3>
+                    <p class="text-white-75 mb-0">
+                        <a href="tel:+11234567890" class="text-decoration-none text-white-75">+1 (123) 456-7890</a><br>
+                        <a href="tel:+19876543210" class="text-decoration-none text-white-75">+1 (987) 654-3210</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Follow Us Section -->
+<section class="page-section bg-luphonix-dark text-white">
+    <div class="container px-4 px-lg-5 text-center">
+        <h2 class="mb-4" data-aos="fade-down">Connect With Us</h2>
+        <p class="text-white-75 mb-5" data-aos="fade-up" data-aos-delay="100">
+            Follow us on social media for the latest updates, tech insights, and project showcases.
+        </p>
+        <div class="social-links-large" data-aos="zoom-in" data-aos-delay="200">
+            <a href="#" class="social-link-large mx-2"><i class="fab fa-github fa-3x"></i></a>
+            <a href="#" class="social-link-large mx-2"><i class="fab fa-linkedin fa-3x"></i></a>
+            <a href="#" class="social-link-large mx-2"><i class="fab fa-twitter fa-3x"></i></a>
+            <a href="#" class="social-link-large mx-2"><i class="fab fa-instagram fa-3x"></i></a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form animation and validation enhancements
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+        const formFields = contactForm.querySelectorAll('input, textarea');
+        
+        // Add animation to form fields on focus
+        formFields.forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.classList.add('field-focused');
+            });
+            
+            field.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.parentElement.classList.remove('field-focused');
+                }
+            });
+            
+            // Add initial class if field has value (e.g., after form submission with errors)
+            if (field.value !== '') {
+                field.parentElement.classList.add('field-focused');
+            }
+        });
+        
+        // Simple form validation
+        contactForm.addEventListener('submit', function(event) {
+            let valid = true;
+            
+            formFields.forEach(field => {
+                if (field.hasAttribute('required') && field.value.trim() === '') {
+                    valid = false;
+                    field.classList.add('is-invalid');
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+            
+            if (!valid) {
+                event.preventDefault();
+                const submitButton = document.getElementById('submitButton');
+                submitButton.classList.add('btn-shake');
+                setTimeout(() => {
+                    submitButton.classList.remove('btn-shake');
+                }, 500);
+            }
+        });
+    });
+</script>
+{% endblock %}

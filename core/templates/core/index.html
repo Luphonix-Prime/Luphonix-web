@@ -1,0 +1,141 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Luphonix - Innovative Tech Solutions{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section vh-100 d-flex align-items-center text-center">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8" data-aos="zoom-in">
+                <img src="/static/svg/phoenix_logo.svg" alt="Luphonix" class="img-fluid hero-logo mb-4" width="180">
+                <h1 class="text-white font-weight-bold hero-title">LUPHONIX</h1>
+                <hr class="divider" />
+                <p class="text-white-75 mb-5 hero-subtitle">Building Next-Generation Digital Solutions</p>
+                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                    <a class="btn btn-primary btn-xl cta-button" href="{% url 'contact' %}">Connect With Us</a>
+                    <a class="btn btn-light btn-xl" href="{% url 'projects' %}">Our Projects</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="page-section bg-gray-800" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white mt-0" data-aos="fade-down">Who We Are</h2>
+                <hr class="divider divider-light" data-aos="zoom-in" data-aos-delay="100" />
+                <p class="text-white-75 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    Luphonix is a team of passionate technology experts dedicated to crafting innovative digital solutions. 
+                    We combine cutting-edge technologies with creative design to deliver exceptional products that drive business growth.
+                </p>
+                <a class="btn btn-light btn-xl" href="{% url 'team' %}" data-aos="zoom-in" data-aos-delay="300">Meet Our Team</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services/Technologies Section -->
+<section class="page-section" id="services">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-center mt-0" data-aos="fade-down">Our Technologies</h2>
+        <hr class="divider" data-aos="zoom-in" data-aos-delay="100" />
+        <div class="row gx-4 gx-lg-5">
+            {% for technology in technologies %}
+            <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="tech-card">
+                    <div class="mt-5">
+                        <div class="mb-2 tech-icon"><i class="{{ technology.icon_class }} fa-4x text-luphonix"></i></div>
+                        <h3 class="h4 mb-2">{{ technology.name }}</h3>
+                        <p class="text-white-75 mb-0">{{ technology.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="text-center mt-5">
+                <a href="{% url 'technologies' %}" class="btn btn-primary btn-xl" data-aos="zoom-in">View All Technologies</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Preview Section -->
+<section class="page-section bg-gray-800">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-center text-white mt-0" data-aos="fade-down">Our Talented Team</h2>
+        <hr class="divider divider-light" data-aos="zoom-in" data-aos-delay="100" />
+        <div class="row gx-4 gx-lg-5">
+            {% for member in team_members %}
+            <div class="col-lg-3 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="team-card">
+                    <div class="team-image-placeholder rounded-circle mb-3"></div>
+                    <h3 class="h5 mb-2">{{ member.name }}</h3>
+                    <p class="text-luphonix mb-2">{{ member.position }}</p>
+                    <p class="text-white-75 small">{{ member.bio|truncatechars:100 }}</p>
+                    <div class="social-links">
+                        {% if member.github %}
+                        <a href="{{ member.github }}" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        {% endif %}
+                        {% if member.linkedin %}
+                        <a href="{{ member.linkedin }}" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        {% endif %}
+                        {% if member.twitter %}
+                        <a href="{{ member.twitter }}" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="text-center mt-3">
+                <a href="{% url 'team' %}" class="btn btn-light btn-xl" data-aos="zoom-in">View Full Team</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="page-section">
+    <div class="container px-4 px-lg-5">
+        <h2 class="text-center mt-0" data-aos="fade-down">Featured Projects</h2>
+        <hr class="divider" data-aos="zoom-in" data-aos-delay="100" />
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            {% for project in featured_projects %}
+            <div class="col-lg-4 col-md-6 mb-5" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'100' }}">
+                <div class="project-card">
+                    <div class="project-image-placeholder mb-3 rounded"></div>
+                    <h3 class="h4 mb-2">{{ project.name }}</h3>
+                    <p class="text-white-75 mb-0">{{ project.description|truncatechars:150 }}</p>
+                    <div class="tech-tags mt-3">
+                        {% for tech in project.technologies.all|slice:":3" %}
+                        <span class="tech-tag">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    {% if project.github_repo %}
+                    <a href="https://github.com/{{ project.github_repo }}" target="_blank" class="btn btn-outline-light btn-sm mt-3">
+                        <i class="fab fa-github me-1"></i> View on GitHub
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="text-center mt-3">
+                <a href="{% url 'projects' %}" class="btn btn-primary btn-xl" data-aos="zoom-in">View All Projects</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="page-section bg-luphonix-dark text-white">
+    <div class="container px-4 px-lg-5 text-center">
+        <h2 class="mb-4" data-aos="fade-down">Ready to start your next project with us?</h2>
+        <p class="text-white-75 mb-5" data-aos="fade-up" data-aos-delay="100">
+            Contact us today and let's discuss how we can transform your ideas into reality!
+        </p>
+        <a class="btn btn-light btn-xl" href="{% url 'contact' %}" data-aos="zoom-in" data-aos-delay="200">Get In Touch</a>
+    </div>
+</section>
+{% endblock %}
