@@ -566,6 +566,8 @@ main {
 .login-page {
     display: flex;
     align-items: center;
+    align-items: middle;
+    margin-left: 7%;
     justify-content: center;
     min-height: calc(100vh - 76px);
 }
